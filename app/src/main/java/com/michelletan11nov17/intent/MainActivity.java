@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.lang.annotation.Target;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -37,14 +39,24 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Return Data", Toast.LENGTH_SHORT).show();
         //to test the oncreate bundle will save those primitive data
         Intent k = new Intent(this, SecondActivity.class);
-        k.putExtra("userid","user1");
+        k.putExtra("userid", "Michelle");
         k.putExtra("firsttime",true);
-        k.putExtra("credit",100);
-        startActivity(k);
+        k.putExtra("credit", 100);
+        // startActivity(k);
+        //To have the return data from the second activity, 3333 is the request code for second activity to handle at return2main
+        startActivityForResult(k,3333); // A method for onActivityResults
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode== 3333 & resultCode == RESULT_OK){
+            Toast.makeText(this, "Settings is:" + data.getStringExtra("settings"),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Game Credit:" + data.getStringExtra("password"),Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     @Override

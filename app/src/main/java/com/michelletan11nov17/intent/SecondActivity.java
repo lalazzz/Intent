@@ -1,5 +1,6 @@
 package com.michelletan11nov17.intent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,11 +17,12 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
         Log.v("Mia Tan", "SecondActivity OnCreate !");
 
-        // to get the bundle data
+        //To get the saved bundle data
         Bundle extras = getIntent().getExtras();
         //Check to see the data retrieve anot
         if (extras !=null) {
             Toast.makeText(this, "Welcome Back " + extras.getString("userid"), Toast.LENGTH_SHORT).show();
+            //Integer.toString for the conversion for integers
             Toast.makeText(this, "Games Credit " + Integer.toString(extras.getInt("credit"),0), Toast.LENGTH_SHORT).show();
         }
 
@@ -29,6 +31,13 @@ public class SecondActivity extends AppCompatActivity {
 
     public void return2main(View view) {
         Toast.makeText(getApplicationContext(), "Back to Main", Toast.LENGTH_SHORT).show();
+        Intent h =new Intent();
+        h.putExtra("settings","Easy");
+        h.putExtra("password","test");
+        //A in-build constant the can use to take the resultCode can be as RESULT_OK
+        setResult(RESULT_OK, h);
+
+
         finish();
 
 
